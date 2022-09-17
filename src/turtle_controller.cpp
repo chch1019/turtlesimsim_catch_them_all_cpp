@@ -1,77 +1,96 @@
 #include "rclcpp/rclcpp.hpp"
+#include <cmath>
 #include "turtlesim/msg/pose.hpp"
 #include "geometry_msgs/msg/twist.hpp"
-#include <cmath>
 
-class TurtleControllerNode : public rclcpp::Node // MODIFY NAME
+class TurtleControllerNode : public rclcpp::Node
 {
 public:
-    TurtleControllerNode() : Node("turtle_controller"), turtlesim_up_(false) // MODIFY NAME
+    TurtleControllerNode() : Node("turtle_controller"), name_("turtle1"), turtlesim_up_(false)
     {
-        pose_subscriber_ = this->create_subscription<turtlesim::msg::Pose>("turtle1/pose", 10, std::bind(&TurtleControllerNode::callback_turtle_pose, this));
-        cmd_vel_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle1/cmd_vel", 10);
-        control_loo_timer_ = this.create_wall_timer(std::chrono::milliseconds(10),std::bind(&TurtleControllerNode::controlLoop, this));
+        target_x_ = 8.0;
+        target_y_ = 4.0;
+
+        cmd_vel_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>(
+            name_ + "/cmd_vel", 10);
+        pose_subscriber_ = this->create_subscription<turtlesim::msg::Pose>(
+            name_ + "/pose", 10, std::bind(&TurtleControllerNode::callbackPose, this, std::placeholders::_1));
+
+        control_loop_timer_ = this->create_wall_timer(
+            std::chrono::milliseconds(10), std::bind(&TurtleControllerNode::controlLoop, this));
     }
 
 private:
-    void callback_turtle_pose(const turtlesim::msg::Pose::SharedPtr pose)
+    void callbackPose(const turtlesim::msg::Pose::SharedPtr pose)
     {
-        pose = *pose.get();
+        pose_ = *pose.get();
         turtlesim_up_ = true;
     }
 
-    void control_loop()
+    void publishCmdVel(double x, double theta)
+    {
+        auto msg = geometry_msgs::msg::Twist();
+        msg.linear.x = x;
+        msg.angular.z = theta;
+        cmd_vel_publisher_->publish(msg);
+    }
+
+    void controlLoop()
     {
         if (!turtlesim_up_)
+        {
             return;
-    
-        double x_dist = x_target - pose_.x;
-        double y_dist = y_target - pose_.y;
-        double target_dist = std::sqrt(x_dist * x_dist + y_dist * y_dist)
+        }
+
+        double dist_x = target_x_ - pose_.x;
+        double dist_y = target_y_ - pose_.y;
+        double distance = std::sqrt(dist_x * dist_x + dist_y * dist_y);
 
         auto msg = geometry_msgs::msg::Twist();
 
-        if (target_dist > 0.5)
+        if (distance > 0.5)
         {
-            //position 
-            msg.linear.x = 2 * target_dist;
+            // position
+            msg.linear.x = 2 * distance;
 
-            //ORIENTATION 
-            double target_theta = std::atan2(y_dist, x_dist);
-            double ang_diff = target_theta - pose_.theta;
-            if(ang_diff > M_PI)
+            // orientation
+            double steering_angle = std::atan2(dist_y, dist_x);
+            double angle_diff = steering_angle - pose_.theta;
+            if (angle_diff > M_PI)
             {
-                ang_diff -=  2 * M_PI;
+                angle_diff -= 2 * M_PI;
             }
-            else if(ang_diff < -M_PI)
+            else if (angle_diff < -M_PI)
             {
-                ang_diff +=  2 * M_PI;
+                angle_diff += 2 * M_PI;
             }
-
+            msg.angular.z = 6 * angle_diff;
         }
         else
         {
+            // target reached!
             msg.linear.x = 0.0;
             msg.angular.z = 0.0;
         }
 
-        cmd_vel_publisher_->publish(msg)
+        cmd_vel_publisher_->publish(msg);
     }
 
-    double x_target;
-    double y_target;
+    double target_x_;
+    double target_y_;
+    std::string name_;
     turtlesim::msg::Pose pose_;
     bool turtlesim_up_;
 
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
-    rclcpp::Subscriber<turtlesim::msg::Pose>::SharedPtr pose_subscriber_;
+    rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr pose_subscriber_;
     rclcpp::TimerBase::SharedPtr control_loop_timer_;
 };
 
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    auto node = std::make_shared<TurtleControllerNode>(); // MODIFY NAME
+    auto node = std::make_shared<TurtleControllerNode>();
     rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;
