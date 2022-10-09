@@ -1,0 +1,22 @@
+[35m[1mScanning dependencies of target turtle_controller[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/turtle_controller.dir/src/turtle_controller.cpp.o[0m
+[100%] [32m[1mLinking CXX executable turtle_controller[0m
+[100%] Built target turtle_controller
+-- Install configuration: ""
+-- Installing: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/lib/turtlesimsim_catch_them_all_cpp/turtle_controller
+-- Set runtime path of "/home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/lib/turtlesimsim_catch_them_all_cpp/turtle_controller" to ""
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/ament_index/resource_index/package_run_dependencies/turtlesimsim_catch_them_all_cpp
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/ament_index/resource_index/parent_prefix_path/turtlesimsim_catch_them_all_cpp
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/environment/ament_prefix_path.sh
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/environment/path.sh
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/environment/path.dsv
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/local_setup.bash
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/local_setup.sh
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/local_setup.zsh
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/local_setup.dsv
+-- Installing: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/package.dsv
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/ament_index/resource_index/packages/turtlesimsim_catch_them_all_cpp
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/cmake/turtlesimsim_catch_them_all_cppConfig.cmake
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/cmake/turtlesimsim_catch_them_all_cppConfig-version.cmake
+-- Up-to-date: /home/chaitu/workspace/ros2_ws/src/turtlesimsim_catch_them_all_cpp/install/turtlesimsim_catch_them_all_cpp/share/turtlesimsim_catch_them_all_cpp/package.xml

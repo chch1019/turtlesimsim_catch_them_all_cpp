@@ -21,11 +21,17 @@ find_package(rclcpp REQUIRED)
 find_package(turtlesim REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
+
 add_executable(turtle_controller src/turtle_controller.cpp)
 ament_target_dependencies(turtle_controller rclcpp turtlesim geometry_msgs)
 
+
+add_executable(turtle_spawner src/turtle_spawner.cpp)
+ament_target_dependencies(turtle_spawner rclcpp turtlesim)
+
 install(TARGETS
   turtle_controller
+  turtle_spawner
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -6,15 +6,15 @@
 class TurtleControllerNode : public rclcpp::Node
 {
 public:
-    TurtleControllerNode() : Node("turtle_controller"), name_("turtle1"), turtlesim_up_(false)
+    TurtleControllerNode() : Node("turtle_controller"), turtlesim_up_(false)
     {
         target_x_ = 8.0;
         target_y_ = 4.0;
 
         cmd_vel_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>(
-            name_ + "/cmd_vel", 10);
+            "turtle1/cmd_vel", 10);
         pose_subscriber_ = this->create_subscription<turtlesim::msg::Pose>(
-            name_ + "/pose", 10, std::bind(&TurtleControllerNode::callbackPose, this, std::placeholders::_1));
+            "turtle1/pose", 10, std::bind(&TurtleControllerNode::callbackPose, this, std::placeholders::_1));
 
         control_loop_timer_ = this->create_wall_timer(
             std::chrono::milliseconds(10), std::bind(&TurtleControllerNode::controlLoop, this));
@@ -78,7 +78,7 @@ private:
 
     double target_x_;
     double target_y_;
-    std::string name_;
+    //std::string name_;
     turtlesim::msg::Pose pose_;
     bool turtlesim_up_;
 
