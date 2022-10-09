@@ -21,6 +21,14 @@ find_package(rclcpp REQUIRED)
 find_package(turtlesim REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/TurtleArray.msg"
+  "msg/Turtle.msg"
+)
+
+
 
 add_executable(turtle_controller src/turtle_controller.cpp)
 ament_target_dependencies(turtle_controller rclcpp turtlesim geometry_msgs)
