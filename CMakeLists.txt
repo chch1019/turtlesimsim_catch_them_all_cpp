@@ -20,6 +20,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(turtlesim REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(turtlesimsim_catch_them_all_cpp REQUIRED)
 
 find_package(rosidl_default_generators REQUIRED)
 
@@ -30,13 +31,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 
 
-
 add_executable(turtle_controller src/turtle_controller.cpp)
-ament_target_dependencies(turtle_controller rclcpp turtlesim geometry_msgs)
+ament_target_dependencies(turtle_controller rclcpp turtlesim geometry_msgs turtlesimsim_catch_them_all_cpp)
 
 
 add_executable(turtle_spawner src/turtle_spawner.cpp)
-ament_target_dependencies(turtle_spawner rclcpp turtlesim)
+ament_target_dependencies(turtle_spawner rclcpp turtlesim turtlesimsim_catch_them_all_cpp)
 
 install(TARGETS
   turtle_controller
